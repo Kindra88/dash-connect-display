@@ -120,76 +120,80 @@ document.addEventListener("DOMContentLoaded", () => {
 			currencyCell.textContent = "Currency data unavailable."
 		}
 	}
-	// ---- MOVIES API (TMDb) ----
-	// If `title` is provided, search TMDb for that title; otherwise show trending.
+	// ---- MOVIES API ----
+	// Simple trending loader (shows top 2 titles).
+	const apiKey = "137124cc58b5c81f3a8e92b442c4dfea";
+
 	/**
-	 * @param {string} [title]
+	 * Returns a valid poster image URL or a placeholder if missing.
+	 * @param {string | null | undefined} path
+	 * @returns {string}
 	 */
-	async function loadMovies(title) {
-		const moviesCell = document.getElementById("movies-cell")
-		if (!moviesCell) return
-		moviesCell.textContent = "Fetching movies..."
+	const posterURL = (path) =>
+		path
+			? `https://image.tmdb.org/t/p/w200${path}`
+			: "https://via.placeholder.com/120x180?text=No+Image";
+
+	/**
+	 * Load trending movies from TMDB and display top 2.
+	 */
+	async function loadTrendingMovies() {
+		const container = document.getElementById("movies-cell");
+		if (!container) return;
+
+		container.textContent = "Loading movies...";
 
 		try {
-				const apiKey = "137124cc58b5c81f3a8e92b442c4dfea"
-				let url;
-				if (title) {
-					url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
-				} else {
-					url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`;
-				}
+			const resp = await fetch(
+				`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`
+			);
+			const data = await resp.json();
 
-				const response = await fetch(url)
-				const data = await response.json()
+			if (!data || !data.results || data.results.length === 0) {
+				container.textContent = "No movies available.";
+				return;
+			}
 
-				const movie = data.results && data.results[0]
-				if (!movie) {
-					moviesCell.textContent = "No movie found.";
-					return;
-				}
+			// Ensure movie output area exists
+			let out = document.getElementById("movies-output");
+			if (!out) {
+				out = document.createElement("div");
+				out.id = "movies-output";
+				container.appendChild(out);
+			}
 
-				const poster = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : "";
+			/** @type {Array<{ title: string, vote_average?: number, poster_path?: string }>} */
+			const movies = data.results.slice(0, 2) // only 2 movies
 
-				moviesCell.innerHTML = `
-				  <div class="movie-box">
-				    <strong>${movie.title}</strong><br>
-				    ⭐ ${movie.vote_average || "N/A"}<br>
-				    ${poster ? `<img src="${poster}" class="api-img" alt="${movie.title}">` : ""}
-				  </div>
-				`
-		} catch (error) {
-			moviesCell.textContent = "Movie unavailable."
+			const moviesHTML = movies
+				.map(
+					(movie) => `
+          <div class="movie-box">
+            <strong>${movie.title}</strong>
+            <div>⭐ ${movie.vote_average ?? "N/A"}</div>
+            <img
+              src="${posterURL(movie.poster_path)}"
+              class="api-img"
+              alt="${movie.title}"
+              loading="lazy"
+            >
+          </div>
+        `
+				)
+				.join("");
+
+			out.innerHTML = moviesHTML;
+		} catch (err) {
+			container.textContent = "Error loading movies 😭";
+			console.error(err);
 		}
 	}
-	// Add movie search controls to the movies cell so users can request any title
-	const moviesCellForControls = document.getElementById("movies-cell")
-	if (moviesCellForControls) {
-		const controls = document.createElement("div")
-		controls.className = "movie-controls"
-		controls.innerHTML = `<input id="movie-input" placeholder="Search movie title..." /> <button id="movie-search">Search</button>`
-		// Insert controls at top of the movies cell
-		moviesCellForControls.prepend(controls)
 
-		const input = controls.querySelector("#movie-input")
-		const btn = controls.querySelector("#movie-search")
-		if (btn && input) {
-			/** @type {HTMLInputElement} */
-			const inputEl = /** @type {HTMLInputElement} */ (input)
-			/** @type {HTMLButtonElement} */
-			const btnEl = /** @type {HTMLButtonElement} */ (btn)
-			btnEl.addEventListener("click", () =>
-				loadMovies(inputEl.value || "Gladiator")
-			)
-			inputEl.addEventListener("keyup", (e) => {
-				if (e && /** @type {KeyboardEvent} */ (e).key === "Enter")
-					loadMovies(inputEl.value || "Gladiator")
-			})
-		}
-	}
-	// run it AFTER placeholders
+	// Run it AFTER placeholders
 	loadDog();
 	loadCat();
 	loadWeather();
 	loadCurrency();
-	loadMovies();
-})
+	loadTrendingMovies();
+}
+)
