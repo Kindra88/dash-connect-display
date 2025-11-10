@@ -1,59 +1,76 @@
 /* Variables */
 :root {
-  --bg: #f7f7f7;
-  --text: #222;
-  --accent: #6a89cc;
-  --spacing: 1rem;
-  --radius: 10px;
-  --font: "Inter", sans-serif;
+	--bg: #f7f7f7;
+	--text: #222;
+	--accent: #6a89cc;
+	--spacing: 1rem;
+	--radius: 10px;
+	--font: "Inter", sans-serif;
 }
 
 /* Layout */
 body {
-  background: var(--bg);
-  font-family: var(--font);
-  color: var(--text);
-  margin: 0;
-  padding: 2rem;
-  text-align: center;
+	background: var(--bg);
+	font-family: var(--font);
+	color: var(--text);
+	margin: 0;
+	padding: 2rem;
+	text-align: center;
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--spacing);
-  margin-top: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: var(--spacing);
+	margin-top: 2rem;
 }
 
 .cell {
-  background: #22dc44;
-  border: 1px solid #ddd;
-  padding: var(--spacing);
-  border-radius: var(--radius);
-  min-height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	background: #22dc44;
+	border: 1px solid #ddd;
+	padding: var(--spacing);
+	border-radius: var(--radius);
+	min-height: 140px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /* Image styling used by API widgets */
 .api-img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 8px;
-  display: block;
-  margin: 0 auto;
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 8px;
+	display: block;
+	margin: 0 auto;
 }
 
+/* Weather box styling for the weather widget */
+
 .api-img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius);
+	width: 100%;
+	height: auto;
+	border-radius: var(--radius);
 }
 .weather-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+   padding: calc(var(--spacing) / 2);
+	background: linear-gradient(180deg, #ffffff, #f5f7fb);
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	min-width: 160px;
+}
+
+.currency-box {
+   display: flex;
+   flex-direction: column;
+   padding: calc(var(--spacing) / 2);
+	background: linear-gradient(180deg, #ffffff, #f5f7fb);
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	min-width: 160px;
 }
