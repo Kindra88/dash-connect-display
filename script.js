@@ -141,7 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		const container = document.getElementById("movies-cell");
 		if (!container) return;
 
-		container.textContent = "Loading movies...";
+		// ✅ FIX: Only affect the movie output area, not the entire cell
+		const out = container.querySelector("#movies-output");
+		if (out) out.textContent = "Loading movies...";
 
 		try {
 			const resp = await fetch(
@@ -150,20 +152,20 @@ document.addEventListener("DOMContentLoaded", () => {
 			const data = await resp.json();
 
 			if (!data || !data.results || data.results.length === 0) {
-				container.textContent = "No movies available.";
+				if (out) out.textContent = "No movies available.";
 				return;
 			}
 
-			// Ensure movie output area exists
-			let out = document.getElementById("movies-output");
-			if (!out) {
-				out = document.createElement("div");
-				out.id = "movies-output";
-				container.appendChild(out);
+			// ✅ If output area doesn’t exist, create it (search bar stays untouched)
+			let outputArea = document.getElementById("movies-output");
+			if (!outputArea) {
+				outputArea = document.createElement("div");
+				outputArea.id = "movies-output";
+				container.prepend(outputArea);
 			}
 
 			/** @type {Array<{ title: string, vote_average?: number, poster_path?: string }>} */
-			const movies = data.results.slice(0, 2) // only 2 movies
+			const movies = data.results.slice(0, 2); // only 2 movies
 
 			const moviesHTML = movies
 				.map(
@@ -182,18 +184,22 @@ document.addEventListener("DOMContentLoaded", () => {
 				)
 				.join("");
 
-			out.innerHTML = moviesHTML;
+			outputArea.innerHTML = moviesHTML;
 		} catch (err) {
-			container.textContent = "Error loading movies 😭";
+			if (out) out.textContent = "Error loading movies 😭";
 			console.error(err);
 		}
 	}
-
+	
 	// Run it AFTER placeholders
-	loadDog();
-	loadCat();
-	loadWeather();
-	loadCurrency();
+	// (Temporarily comment out if those functions aren’t defined yet)
+	try {
+		loadDog();
+		loadCat();
+		loadWeather();
+		loadCurrency();
+	} catch (e) {
+		console.warn("Some API loaders not defined yet — skipping extras.");
+	}
 	loadTrendingMovies();
-}
-)
+})

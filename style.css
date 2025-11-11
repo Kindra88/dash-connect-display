@@ -1,5 +1,6 @@
 /* Variables */
 :root {
+	
 	--bg: #f7f7f7;
 	--text: #222;
 	--accent: #6a89cc;
@@ -21,8 +22,10 @@ body {
 .grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	grid-auto-flow: dense;
 	gap: var(--spacing);
 	margin-top: 2rem;
+	grid-auto-rows: minmax(200px, auto);
 }
 
 .cell {
@@ -90,11 +93,14 @@ body {
   border-radius: 6px;
   margin-top: 0.35rem;
 }
+#movies-cell .movie-box {
+  margin-bottom: 2rem;
+}
 
 .api-img {
   width: 120px;
   border-radius: 6px;
-  margin-top: 0.35rem;
+
 }
 
 
@@ -121,6 +127,20 @@ body {
 	color: #fff;
 	cursor: pointer;
 }
+
+#movies-cell {
+	grid-column: 1 / 1;
+  align-self: start;
+  height: auto; /* grows as needed for posters */
+  min-height: 300px;
+}
+
+#free-choice-cell {
+  align-self: start;
+  height: auto;
+  min-height: 200px;
+}
+
 
 
 
