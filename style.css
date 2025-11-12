@@ -5,7 +5,7 @@
 :root {
 	
 	--bg: #f7f7f7;
-	--text: #222;
+	--text: #0b5770;
 	--accent: #6a89cc;
 	--spacing: 1rem;
 	--radius: 10px;
@@ -32,11 +32,13 @@ body {
 }
 
 .cell {
-
-  background: #18c544;
-  border: 1px solid #7b7b7b;
+font-family: 'Courier New', Courier, monospace;
+font-size: x-large;
+  background: #000;
+  border: 1px solid #00ff80;
   padding: var(--spacing);
   border-radius: var(--radius);
+  box-shadow: 0 0 10px  rgba(0, 255, 128, 0.3); 
   min-height: 140px;
 
   display: flex;
@@ -44,6 +46,7 @@ body {
   align-items: center;
   justify-content: flex-start; 
   text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 
@@ -71,7 +74,7 @@ body {
 	align-items: center;
 	text-align: center;
 	padding: calc(var(--spacing) / 2);
-	background: linear-gradient(180deg, #ffffff, #f5f7fb);
+	background: linear-gradient(180deg, #77b707, #ed690b);
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 	min-width: 160px;
@@ -84,10 +87,10 @@ body {
 	align-items: center;
 	text-align: center;
 	padding: calc(var(--spacing) / 2);
-	background: linear-gradient(180deg, #ffffff, #f5f7fb);
+	background: linear-gradient(180deg, #879b17, #a04970);
 	border-radius: 8px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-	min-width: 160px;
+	box-shadow: 0 1px 3px rgba(152, 21, 21, 0.06);
+	min-width: 120px;
 }
 
 /* Movie styling and controls */
@@ -136,6 +139,7 @@ body {
 	cursor: pointer;
 }
 
+
 #movies-cell {
 	grid-column: 1 / 1;
   align-self: start;
@@ -148,6 +152,51 @@ body {
   height: auto;
   min-height: 200px;
 }
+
+/* ---- Joke Cell (Console Theme) ---- */
+  .dashboard-cell {
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 1.5rem;
+  text-align: center;
+  flex-wrap: wrap;
+  transition: transform 0.2s ease;
+  box-sizing: border-box;
+  min-height: 120px;
+}
+
+
+
+#joke-text {
+	color: #00ff80;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 4rem;
+  padding: 0.5rem 1rem;
+}
+
+#joke-button {
+  background: transparent;
+  border: 1px solid #7eb70b;
+  color: #00ff80;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#joke-button:hover {
+  background: #a537ea;
+box-shadow: 0 0 20px rgba(44, 218, 131, 0.5);
+  transform: translateY(-2px);
+  
+}
+
+
 
 
 

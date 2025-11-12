@@ -139,86 +139,90 @@ document.addEventListener("DOMContentLoaded", () => {
 	 */
 	function setupMovieSearch() {
 		const container = document.getElementById("movies-cell")
-		if (!container || container.querySelector(".movie-controls")) return;
+		if (!container || container.querySelector(".movie-controls")) return
 
-		const controls = document.createElement("div");
-		controls.className = "movie-controls";
+		const controls = document.createElement("div")
+		controls.className = "movie-controls"
 		controls.innerHTML = `
     <input id="movie-input" type="text" placeholder="Search movie title...">
     <button id="movie-search">Search</button>
-  `;
-		container.insertBefore(controls, container.firstChild);
+  `
+		container.insertBefore(controls, container.firstChild)
 
-		const input = controls.querySelector("#movie-input");
-		const button = controls.querySelector("#movie-search");
-		const output = document.getElementById("movies-output");
-		
+		const input = controls.querySelector("#movie-input")
+		const button = controls.querySelector("#movie-search")
+		const output = document.getElementById("movies-output")
+
 		const runSearch = async () => {
-			const title = input.value.trim();
-			if (!title) return loadTrendingMovies();
+			const title = input.value.trim()
+			if (!title) return loadTrendingMovies()
 
-			output.textContent = "Searching...";
+			output.textContent = "Searching..."
 			try {
 				const resp = await fetch(
-					`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`
-				);
-				const data = await resp.json();
+					`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
+						title
+					)}`
+				)
+				const data = await resp.json()
 				if (!data.results || data.results.length === 0) {
-					output.textContent = "No results found.";
-					return;
+					output.textContent = "No results found."
+					return
 				}
 
-				const movies = data.results.slice(0, 2);
+				const movies = data.results.slice(0, 2)
 				output.innerHTML = movies
 					.map(
 						(m) => `
           <div class="movie-box">
             <strong>${m.title}</strong>
             <div>⭐ ${m.vote_average ?? "N/A"}</div>
-            <img src="${posterURL(m.poster_path)}" class="api-img" alt="${m.title}">
+            <img src="${posterURL(m.poster_path)}" class="api-img" alt="${
+							m.title
+						}">
           </div>`
 					)
-					.join("");
+					.join("")
 			} catch {
-				output.textContent = "Error fetching movie.";
+				output.textContent = "Error fetching movie."
 			}
 		}
 
-		button.addEventListener("click", runSearch);
-		input.addEventListener("keyup", (e) => e.key === "Enter" && runSearch());
+		button.addEventListener("click", runSearch)
+		input.addEventListener("keyup", (e) => e.key === "Enter" && runSearch())
 	}
 
 	/**
 	 * Load trending movies from TMDB and display top 2.
 	 */
 	async function loadTrendingMovies() {
-		const container = document.getElementById("movies-cell");
-		if (!container) return;
-		
-		const out = container.querySelector("#movies-output");
-		if (out) out.textContent = "Loading movies...";
+		const container = document.getElementById("movies-cell")
+		if (!container) return
+
+		const out = container.querySelector("#movies-output")
+		if (out) out.textContent = "Loading movies..."
 
 		try {
 			const resp = await fetch(
 				`https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`
-			);
-			const data = await resp.json();
+			)
+			const data = await resp.json()
 
 			if (!data || !data.results || data.results.length === 0) {
-				if (out) out.textContent = "No movies available.";
-				return;
+				if (out) out.textContent = "No movies available."
+				return
 			}
 
 			// ✅ Create output area if missing (search bar stays untouched)
-			let outputArea = document.getElementById("movies-output");
+			let outputArea = document.getElementById("movies-output")
 			if (!outputArea) {
-				outputArea = document.createElement("div");
-				outputArea.id = "movies-output";
-				container.appendChild(outputArea);
+				outputArea = document.createElement("div")
+				outputArea.id = "movies-output"
+				container.appendChild(outputArea)
 			}
 
 			/** @type {Array<{ title: string, vote_average?: number, poster_path?: string }>} */
-			const movies = data.results.slice(0, 2); // only 2 movies
+			const movies = data.results.slice(0, 2) // only 2 movies
 
 			const moviesHTML = movies
 				.map(
@@ -235,25 +239,54 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `
 				)
-				.join("");
+				.join("")
 
-			outputArea.innerHTML = moviesHTML;
+			outputArea.innerHTML = moviesHTML
 		} catch (err) {
-			if (out) out.textContent = "Error loading movies 😭";
-			console.error(err);
+			if (out) out.textContent = "Error loading movies 😭"
+			console.error(err)
 		}
+	}
+
+	// ---- JOKES CELL ----
+	function setupJokeCell() {
+		const jokes = [
+			`"Knock, knock." 
+			"Who’s there?" ... very long pause ..."Java."`,
+			`"Knock knock!" "Who is there?" "Yah!" "Yah who?" "No, not Yahoo — Google."`,
+			`Q. Why did the monkey fall from the tree? A. Its node got deleted.`,
+			`Q. What do you call when 8 mosquitos bit you? A. A mosquito byte.`,
+			`Why did the CSS selector go to therapy? It had too many issues with class.`,
+			`Why did the HTML and CSS break up? Because they had too many issues with class.`,
+			`Why did the JavaScript developer break up with React? Because they couldn't handle the Inter-DOMinational differences.`,
+			`How do you comfort a JavaScript bug? You console it.`,
+			`Why did the JavaScript developer go broke? Because he used up all his cache.`,
+			`Why did the React class component feel relieved? Because it was now off the hook.`,
+		]
+
+		const jokeText = document.getElementById("joke-text")
+		const jokeButton = document.getElementById("joke-button")
+
+		// Randomizer
+		function showRandomJoke() {
+			const randomIndex = Math.floor(Math.random() * jokes.length)
+			jokeText.textContent = jokes[randomIndex]
+		}
+
+		jokeButton.addEventListener("click", showRandomJoke)
 	}
 
 	// ---- RUN AFTER PLACEHOLDERS ----
 	try {
-		loadDog();
-		loadCat();
-		loadWeather();
-		loadCurrency();
+		loadDog()
+		loadCat()
+		loadWeather()
+		loadCurrency()
 	} catch (e) {
-		console.warn("Some API loaders not defined yet — skipping extras.");
+		console.warn("Some API loaders not defined yet — skipping extras.")
 	}
 
-	setupMovieSearch();
-	loadTrendingMovies();
+	setupMovieSearch()
+	loadTrendingMovies()
+	setupJokeCell()
 })
