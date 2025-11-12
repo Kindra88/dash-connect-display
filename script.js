@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	// ---- MOVIES API ----
 	// Simple trending loader (shows top 2 titles).
-	const apiKey = "137124cc58b5c81f3a8e92b442c4dfea";
+	const apiKey = "137124cc58b5c81f3a8e92b442c4dfea"
 
 	/**
 	 * Returns a valid poster image URL or a placeholder if missing.
@@ -132,7 +132,61 @@ document.addEventListener("DOMContentLoaded", () => {
 	const posterURL = (path) =>
 		path
 			? `https://image.tmdb.org/t/p/w200${path}`
-			: "https://via.placeholder.com/120x180?text=No+Image";
+			: "https://via.placeholder.com/120x180?text=No+Image"
+
+	/**
+	 * Sets up the movie search bar and event listeners.
+	 */
+	function setupMovieSearch() {
+		const container = document.getElementById("movies-cell")
+		if (!container || container.querySelector(".movie-controls")) return;
+
+		const controls = document.createElement("div");
+		controls.className = "movie-controls";
+		controls.innerHTML = `
+    <input id="movie-input" type="text" placeholder="Search movie title...">
+    <button id="movie-search">Search</button>
+  `;
+		container.insertBefore(controls, container.firstChild);
+
+		const input = controls.querySelector("#movie-input");
+		const button = controls.querySelector("#movie-search");
+		const output = document.getElementById("movies-output");
+		
+		const runSearch = async () => {
+			const title = input.value.trim();
+			if (!title) return loadTrendingMovies();
+
+			output.textContent = "Searching...";
+			try {
+				const resp = await fetch(
+					`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`
+				);
+				const data = await resp.json();
+				if (!data.results || data.results.length === 0) {
+					output.textContent = "No results found.";
+					return;
+				}
+
+				const movies = data.results.slice(0, 2);
+				output.innerHTML = movies
+					.map(
+						(m) => `
+          <div class="movie-box">
+            <strong>${m.title}</strong>
+            <div>⭐ ${m.vote_average ?? "N/A"}</div>
+            <img src="${posterURL(m.poster_path)}" class="api-img" alt="${m.title}">
+          </div>`
+					)
+					.join("");
+			} catch {
+				output.textContent = "Error fetching movie.";
+			}
+		}
+
+		button.addEventListener("click", runSearch);
+		input.addEventListener("keyup", (e) => e.key === "Enter" && runSearch());
+	}
 
 	/**
 	 * Load trending movies from TMDB and display top 2.
@@ -140,8 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	async function loadTrendingMovies() {
 		const container = document.getElementById("movies-cell");
 		if (!container) return;
-
-		// ✅ FIX: Only affect the movie output area, not the entire cell
+		
 		const out = container.querySelector("#movies-output");
 		if (out) out.textContent = "Loading movies...";
 
@@ -156,12 +209,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				return;
 			}
 
-			// ✅ If output area doesn’t exist, create it (search bar stays untouched)
+			// ✅ Create output area if missing (search bar stays untouched)
 			let outputArea = document.getElementById("movies-output");
 			if (!outputArea) {
 				outputArea = document.createElement("div");
 				outputArea.id = "movies-output";
-				container.prepend(outputArea);
+				container.appendChild(outputArea);
 			}
 
 			/** @type {Array<{ title: string, vote_average?: number, poster_path?: string }>} */
@@ -190,9 +243,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			console.error(err);
 		}
 	}
-	
-	// Run it AFTER placeholders
-	// (Temporarily comment out if those functions aren’t defined yet)
+
+	// ---- RUN AFTER PLACEHOLDERS ----
 	try {
 		loadDog();
 		loadCat();
@@ -201,5 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	} catch (e) {
 		console.warn("Some API loaders not defined yet — skipping extras.");
 	}
+
+	setupMovieSearch();
 	loadTrendingMovies();
 })
