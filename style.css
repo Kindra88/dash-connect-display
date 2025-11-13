@@ -1,9 +1,11 @@
-*, *::before, *::after {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
+
 /* Variables */
 :root {
-	
 	--bg: #f7f7f7;
 	--text: #0b5770;
 	--accent: #6a89cc;
@@ -32,24 +34,22 @@ body {
 }
 
 .cell {
-font-family: 'Courier New', Courier, monospace;
-font-size: x-large;
-  background: #000;
-  border: 1px solid #00ff80;
-  padding: var(--spacing);
-  border-radius: var(--radius);
-  box-shadow: 0 0 10px  rgba(0, 255, 128, 0.3); 
-  min-height: 140px;
+	font-family: "Courier New", Courier, monospace;
+	font-size: x-large;
+	background: #000;
+	border: 1px solid #00ff80;
+	padding: var(--spacing);
+	border-radius: var(--radius);
+	box-shadow: 0 0 10px rgba(0, 255, 128, 0.3);
+	min-height: 140px;
 
-  display: flex;
-  flex-direction: column;   
-  align-items: center;
-  justify-content: flex-start; 
-  text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	text-align: center;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
-
 
 /* Image styling used by API widgets */
 .api-img {
@@ -67,6 +67,7 @@ font-size: x-large;
 	height: auto;
 	border-radius: var(--radius);
 }
+
 .weather-box {
 	display: flex;
 	flex-direction: column;
@@ -95,20 +96,19 @@ font-size: x-large;
 
 /* Movie styling and controls */
 .movie-box {
-    width: 150px;
-  border-radius: 6px;
-  margin-top: 0.35rem;
+	width: 150px;
+	border-radius: 6px;
+	margin-top: 0.35rem;
 }
+
 #movies-cell .movie-box {
-  margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 .api-img {
-  width: 120px;
-  border-radius: 6px;
-
+	width: 120px;
+	border-radius: 6px;
 }
-
 
 .movie-controls {
 	display: flex;
@@ -119,17 +119,19 @@ font-size: x-large;
 	max-width: fit-content;
 	box-sizing: border-box;
 }
+
 .movie-controls input {
 	padding: 0.1rem 0.6rem;
 	border-radius: 2rem;
 	border: 0.5px solid #ccc;
-	box-sizing: border-box; 
-	
+	box-sizing: border-box;
 }
+
 .movie-controls input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(106,137,204,0.25);
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px rgba(106, 137, 204, 0.25);
 }
+
 .movie-controls button {
 	padding: 0.2em 0.6rem;
 	border-radius: 2rem;
@@ -139,65 +141,52 @@ font-size: x-large;
 	cursor: pointer;
 }
 
-
 #movies-cell {
 	grid-column: 1 / 1;
-  align-self: start;
-  height: auto; /* grows as needed for posters */
-  min-height: 300px;
+	align-self: start;
+	height: auto;
+	/* grows as needed for posters */
+	min-height: 300px;
 }
 
 #free-choice-cell {
-  align-self: start;
-  height: auto;
-  min-height: 200px;
+	align-self: start;
+	height: auto;
+	min-height: 200px;
 }
 
 /* ---- Joke Cell (Console Theme) ---- */
-  .dashboard-cell {
- display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  padding: 1.5rem;
-  text-align: center;
-  flex-wrap: wrap;
-  transition: transform 0.2s ease;
-  box-sizing: border-box;
-  min-height: 120px;
+#dashboard-cell {
+	align-self: start;
+	align-items: center;
+	justify-content: center;
+
+	padding: 1.5rem;
+	text-align: center;
+	transition: transform 0.2s ease;
 }
-
-
 
 #joke-text {
 	color: #00ff80;
-  font-size: 1rem;
-  line-height: 1.6;
-  min-height: 4rem;
-  padding: 0.5rem 1rem;
+	font-size: 1rem;
+	line-height: 1.6;
+	min-height: 4rem;
+	padding: 0.5rem 1rem;
 }
 
 #joke-button {
-  background: transparent;
-  border: 1px solid #7eb70b;
-  color: #00ff80;
-  font-family: inherit;
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+	background: transparent;
+	border: 1px solid #7eb70b;
+	color: #00ff80;
+	font-family: inherit;
+	padding: 0.5rem 1rem;
+	margin-top: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
 #joke-button:hover {
-  background: #a537ea;
-box-shadow: 0 0 20px rgba(44, 218, 131, 0.5);
-  transform: translateY(-2px);
-  
+	background: #a537ea;
+	box-shadow: 0 0 20px rgba(44, 218, 131, 0.5);
+	transform: translateY(-2px);
 }
-
-
-
-
-
-
