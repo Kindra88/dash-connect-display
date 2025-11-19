@@ -190,3 +190,51 @@ body {
 	box-shadow: 0 0 20px rgba(44, 218, 131, 0.5);
 	transform: translateY(-2px);
 }
+
+/* ---- GitHub API Cell ---- */  /* ⬅️ NEW */
+
+#github-cell {
+  padding: 1.5rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;           
+  color: var(--text-primary);
+  height: auto;   
+  min-height: 200px;
+}
+#github-content img {
+  margin-bottom: 1rem;
+  color: #00ff80;  /* neon green to match your theme */
+	width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid #00ff80; /* neon green border */
+}
+#github-content,
+#github-content h3,
+#github-content p,
+#github-content a {
+  color: #00ff80;  /* neon green to match your theme */
+}
+
+/* Avatar styling */
+
+
+/* Optional: style link like a button */
+#github-content a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #00ff80;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+#github-content a:hover {
+  background: #00ff8033; /* faint green glow */
+}
+
