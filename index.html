@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>API Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>API Dashboard</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h1>API Dashboard</h1>
 
-  <h1>API Dashboard</h1>
+		<div class="grid">
+			<div class="cell" id="dog-cell"></div>
+			<div class="cell" id="cat-cell"></div>
+			<div class="cell" id="weather-cell"></div>
+			<div class="cell" id="currency-cell"></div>
+			<div class="cell" id="movies-cell">
+				<h2>Movies api</h2>
+				<div id="movies-inner"></div>
 
-  <div class="grid">
-    <div class="cell" id="dog-cell"></div>
-    <div class="cell" id="cat-cell"></div>
-    <div class="cell" id="weather-cell"></div>
-    <div class="cell" id="currency-cell"></div>
-   <div class="cell" id="movies-cell">
-  <h2>Movies api</h2>
-  <div id="movies-inner"></div>
+				<div class="movie-controls">
+					<input
+						id="movie-input"
+						type="text"
+						placeholder="Search movie title..."
+					/>
+					<button id="movie-search-btn">Search</button>
+				</div>
+			</div>
 
-  <div class="movie-controls">
-    <input id="movie-input" type="text" placeholder="Search movie title...">
-    <button id="movie-search-btn">Search</button>
-  </div>
-</div>
+			<div class="cell" id="github-cell">
+				<h2>GitHub API</h2>
+				<div id="github-content">Loading GitHub data...</div>
+			</div>
 
-    <div class="cell" id="github-cell">
-     <h2> GitHub API</h2>
-     <div id="github-content">Loading GitHub data...</div> 
-    </div> 
-    
-    <div class="cell" id="dashboard-cell">😂 Developer Jokes
-  <p id="joke-text">Click below for a random joke. </p>
-  <button id="joke-button">New Joke</button>
-    </div>
+			<div class="cell" id="dashboard-cell">
+				😂 Developer Jokes
+				<p id="joke-text">Click below for a random joke.</p>
+				<button id="joke-button">New Joke</button>
+			</div>
 
-    
-    <div class="cell" id="free-choice-cell"></div>
-  
-  </div>
-  
-  <script src="script.js" defer></script>
-</body>
+			<div class="cell" id="free-choice-cell"></div>
+		</div>
+
+		<script src="script.js" defer></script>
+	</body>
 </html>
