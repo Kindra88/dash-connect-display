@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	setText("currency-cell", "Currency API");
 	setText("movies-cell", "Movies API");
 	setText("github-cell", "GitHub API");
-	setText("joke-cell", "Joke API");
+	
 	setText("free-choice-cell", "Your Choice API");
 
 	// ---- DOG API ----

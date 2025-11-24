@@ -148,58 +148,76 @@ body {
 	/* grows as needed for posters */
 	min-height: 300px;
 }
-/* ---- Joke Cell (Console Theme) ---- */
-
+/* JOKE CELL */
 #joke-cell {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 1.5rem;
-	text-align: center;
-	min-height: 200px;
-}
-.joke-box {
-	background: #111;
-	border: 1px solid #00ff80;
-	border-radius: 8px;
-	padding: 1rem;
-	width: 100%;
-	max-width: 240px;
-	box-shadow: 0 0 12px rgba(0, 255, 128, 0.35);
-	margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+	 align-self: start;
 }
 
+/* Box that wraps the joke */
+.joke-box {
+    background: #111;
+    border: 1px solid #00ff80;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 100%;
+    max-width: 240px;
+    box-shadow: 0 0 12px rgba(0, 255, 128, 0.35);
+    
+}
+
+/* Actual joke text */
 #joke-text {
-	color: #00ff80;
-	font-size: 1rem;
-	line-height: 1.5;
-	min-height: 3rem;
-	margin-bottom: 0.5rem;
+    color: #00ff80;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 3rem;
+    margin-bottom: 1rem;
+ 
+}
+#joke-text  {
+	 font-style: italic;
+	 opacity: 0.7;
+	 font-size: 1.1rem;
+	
 }
 
 #joke-cell p {
-	color: #00ff80;
-	font-size: 0.9rem;
-	margin: 0;
-	opacity: 0.85;
+	font-size: 0.7rem;
 }
 
+/* Joke description */
+#joke-cell  {
+    color: #00ff80;
+    opacity: 0.85;
+    margin: 0 0 1rem 0;
+}
+
+/* Button */
 #joke-button {
-	background: transparent;
-	border: 1px solid #7eb70b;
-	color: #00ff80;
-	padding: 0.5rem 1.2rem;
-	border-radius: 6px;
-	cursor: pointer;
-	font-family: inherit;
+    background: transparent;
+    border: 1px solid #7eb70b;
+    color: #00ff80;
+    padding: .5rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+	 margin-top:1rem;
+	
 }
 
 #joke-button:hover {
-	background: #a537ea;
-	box-shadow: 0 0 20px rgba(44, 218, 131, 0.6);
-	transform: translateY(-2px);
+    background: #a537ea;
+    box-shadow: 0 0 20px rgba(44, 218, 131, 0.6);
+    transform: translateY(-2px);
 }
+
+
+
+
 
 /* ---- GitHub API Cell ---- */ /* ⬅️ NEW */
 
