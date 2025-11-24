@@ -148,46 +148,56 @@ body {
 	/* grows as needed for posters */
 	min-height: 300px;
 }
-
-#free-choice-cell {
-	align-self: start;
-	height: auto;
-	min-height: 200px;
-}
-
 /* ---- Joke Cell (Console Theme) ---- */
-#dashboard-cell {
-	align-self: start;
-	align-items: center;
-	justify-content: center;
 
+#joke-cell {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
 	padding: 1.5rem;
 	text-align: center;
-	transition: transform 0.2s ease;
+	min-height: 200px;
+}
+.joke-box {
+	background: #111;
+	border: 1px solid #00ff80;
+	border-radius: 8px;
+	padding: 1rem;
+	width: 100%;
+	max-width: 240px;
+	box-shadow: 0 0 12px rgba(0, 255, 128, 0.35);
+	margin-bottom: 1rem;
 }
 
 #joke-text {
 	color: #00ff80;
 	font-size: 1rem;
-	line-height: 1.6;
-	min-height: 4rem;
-	padding: 0.5rem 1rem;
+	line-height: 1.5;
+	min-height: 3rem;
+	margin-bottom: 0.5rem;
+}
+
+#joke-cell p {
+	color: #00ff80;
+	font-size: 0.9rem;
+	margin: 0;
+	opacity: 0.85;
 }
 
 #joke-button {
 	background: transparent;
 	border: 1px solid #7eb70b;
 	color: #00ff80;
-	font-family: inherit;
-	padding: 0.5rem 1rem;
-	margin-top: 1rem;
+	padding: 0.5rem 1.2rem;
+	border-radius: 6px;
 	cursor: pointer;
-	transition: all 0.3s ease;
+	font-family: inherit;
 }
 
 #joke-button:hover {
 	background: #a537ea;
-	box-shadow: 0 0 20px rgba(44, 218, 131, 0.5);
+	box-shadow: 0 0 20px rgba(44, 218, 131, 0.6);
 	transform: translateY(-2px);
 }
 
@@ -204,15 +214,16 @@ body {
 	height: auto;
 	min-height: 200px;
 }
-#github-content img {
-	margin-bottom: 1rem;
-	color: #00ff80; /* neon green to match your theme */
-	width: 100px;
-	height: 100px;
+#github-img {
+	width: 110px;
+	height: 110px;
 	border-radius: 50%;
+	border: 3px solid #00ff80;
+
+	box-shadow: 0 0 12px #00ff80aa;
 	margin-bottom: 1rem;
-	border: 2px solid #00ff80; /* neon green border */
 }
+
 #github-content,
 #github-content h3,
 #github-content p,

@@ -253,8 +253,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
-	// ---- JOKES CELL ----
 	function setupJokeCell() {
+		const jokeCell = document.getElementById("joke-cell");
+		if (!jokeCell) return;
+
+		const jokeText = jokeCell.querySelector("#joke-text");
+		const jokeButton = jokeCell.querySelector("#joke-button");
+
+		if (!jokeText || !jokeButton) return;
+
 		const jokes = [
 			`"Knock, knock." 
 			"Who’s there?" ... very long pause ..."Java."`,
@@ -269,15 +276,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			`Why did the React class component feel relieved? Because it was now off the hook.`,
 		];
 
-		const jokeText = document.getElementById("joke-text");
-		const jokeButton = document.getElementById("joke-button");
-
-		// Randomizer
 		function showRandomJoke() {
 			const randomIndex = Math.floor(Math.random() * jokes.length);
 			jokeText.textContent = jokes[randomIndex];
 		}
-
+		showRandomJoke();
 		jokeButton.addEventListener("click", showRandomJoke);
 	}
 
