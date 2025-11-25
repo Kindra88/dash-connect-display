@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	setText("weather-cell", "Weather API");
 	setText("currency-cell", "Currency API");
 	setText("movies-cell", "Movies API");
-	setText("github-cell", "GitHub API");
-	
 	setText("free-choice-cell", "Your Choice API");
 
 	// ---- DOG API ----
@@ -284,35 +282,36 @@ document.addEventListener("DOMContentLoaded", () => {
 		jokeButton.addEventListener("click", showRandomJoke);
 	}
 
-	// ---- GITHUB API ----//
+async function loadGitHubProfile() {
+	const username = "Kindra88";
+	const url = `https://api.github.com/users/${username}`;
 
-	async function loadGitHubProfile() {
-		const username = "Kindra88";
-		const url = `https://api.github.com/users/${username}`;
+	const container = document.getElementById("github-content");
+	if (!container) return;
 
-		const container = document.getElementById("github-content");
-		if (!container) return;
+	// Always start fresh
+	container.innerHTML = `<p>Loading GitHub data...</p>`;
 
-		container.textContent = "Loading GitHub data...";
+	try {
+		const response = await fetch(url);
+		if (!response.ok) throw new Error("GitHub API failed");
 
-		try {
-			const response = await fetch(url);
-			if (!response.ok) throw new Error("GitHub API request failed");
+		const data = await response.json();
 
-			const data = await response.json();
-
-			container.innerHTML = `
-      <img src="${data.avatar_url}" alt="GitHub Avatar">
-      <h3>${data.login}</h3>
-      <p>Public Repos: ${data.public_repos}</p>
-      <p>Followers: ${data.followers}</p>
-      <a href="${data.html_url}" target="_blank">View Profile</a>
+		// Build all your children RIGHT HERE, clean and controlled
+		container.innerHTML = `
+      <img id="github-img" src="${data.avatar_url}" alt="GitHub Avatar" />
+      <h3 id="github-name">${data.login}</h3>
+      <p id="github-repos">Public Repos: ${data.public_repos}</p>
+      <p id="github-followers">Followers: ${data.followers}</p>
+      <a id="github-link" href="${data.html_url}" target="_blank">View Profile</a>
     `;
-		} catch (error) {
-			container.innerHTML = "<p>Could not load GitHub data.</p>";
-			console.error(error);
-		}
+	} catch (err) {
+		container.innerHTML = "<p>Could not load GitHub data.</p>";
+		console.error(err);
 	}
+}
+
 
 	// ---- RUN AFTER PLACEHOLDERS ----
 	try {

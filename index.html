@@ -14,40 +14,44 @@
 			<div class="cell" id="weather-cell"></div>
 			<div class="cell" id="currency-cell"></div>
 			<div class="cell" id="movies-cell">
-    <h2>Movies API</h2>
-    <div id="movies-inner"></div>
+				<h2>Movies API</h2>
+				<div id="movies-inner"></div>
 
-    <div id="movie-controls">
-        <input id="movie-input" type="text" placeholder="Search movie title..." />
-        <button id="movie-search-btn">Search</button>
-    </div>
+				<div id="movie-controls">
+					<input
+						id="movie-input"
+						type="text"
+						placeholder="Search movie title..."
+					/>
+					<button id="movie-search-btn">Search</button>
+				</div>
 
-    <div id="movies-output"></div>
-</div>
+				<div id="movies-output"></div>
+			</div>
 
+			<div class="cell" id="joke-cell">
+				<div class="joke-box">
+					Api Jokes
+					<h2 id="joke-text"></h2>
+					<p>Click for another random joke.</p>
+				</div>
 
-    
+				<button id="joke-button">New Joke</button>
+			</div>
 
+			<div class="cell" id="free-choice-cell"></div>
 
-
-				
-			
-			
-			<div class="cell" id="joke-cell"> 
-            <div class="joke-box"> Api Jokes
-                <h2 id="joke-text"></h2>
-                <p>Click for another random joke.</p>
-            </div>
-
-            <button id="joke-button">New Joke</button>
-        </div>
-
-        <div class="cell" id="free-choice-cell"></div>
-        <div class="cell" id="github-cell">
-            <div id="github-content"></div>
-        </div>
-			
+			<div class="cell" id="github-cell">
+				<h2>GitHub API</h2>
+				<div id="github-content">
+					<img id="github-img" src="" alt="GitHub Avatar" />
+					<h3 id="github-name"></h3>
+					<p id="github-repos"></p>
+					<p id="github-followers"></p>
+					<a id="github-link" href="#" target="_blank">View Profile</a>
+				</div>
+			</div>
 		</div>
-			<script src="script.js" defer ></script>
+		<script src="script.js" defer></script>
 	</body>
 </html>

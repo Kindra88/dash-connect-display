@@ -228,7 +228,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	color: var(--text-primary);
+	color: #00ff80;
 	height: auto;
 	min-height: 200px;
 }
@@ -242,12 +242,7 @@ body {
 	margin-bottom: 1rem;
 }
 
-#github-content,
-#github-content h3,
-#github-content p,
-#github-content a {
-	color: #00ff80; /* neon green to match your theme */
-}
+
 
 /* Avatar styling */
 
