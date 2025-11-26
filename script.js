@@ -282,36 +282,134 @@ document.addEventListener("DOMContentLoaded", () => {
 		jokeButton.addEventListener("click", showRandomJoke);
 	}
 
-async function loadGitHubProfile() {
-	const username = "Kindra88";
-	const url = `https://api.github.com/users/${username}`;
+	async function loadGitHubProfile() {
+		const username = "Kindra88";
+		const url = `https://api.github.com/users/${username}`;
 
-	const container = document.getElementById("github-content");
-	if (!container) return;
+		const container = document.getElementById("github-content");
+		if (!container) return;
 
-	// Always start fresh
-	container.innerHTML = `<p>Loading GitHub data...</p>`;
+		// Always start fresh
+		container.innerHTML = `<p>Loading GitHub data...</p>`;
 
-	try {
-		const response = await fetch(url);
-		if (!response.ok) throw new Error("GitHub API failed");
+		try {
+			const response = await fetch(url);
+			if (!response.ok) throw new Error("GitHub API failed");
 
-		const data = await response.json();
+			const data = await response.json();
 
-		// Build all your children RIGHT HERE, clean and controlled
-		container.innerHTML = `
+			// Build all your children RIGHT HERE, clean and controlled
+			container.innerHTML = `
       <img id="github-img" src="${data.avatar_url}" alt="GitHub Avatar" />
       <h3 id="github-name">${data.login}</h3>
       <p id="github-repos">Public Repos: ${data.public_repos}</p>
       <p id="github-followers">Followers: ${data.followers}</p>
       <a id="github-link" href="${data.html_url}" target="_blank">View Profile</a>
     `;
-	} catch (err) {
-		container.innerHTML = "<p>Could not load GitHub data.</p>";
-		console.error(err);
+		} catch (err) {
+			container.innerHTML = "<p>Could not load GitHub data.</p>";
+			console.error(err);
+		}
 	}
-}
 
+	// =========================
+	// Constants
+	// =========================
+	const FLUX_FAKE_DELAY = 300; // ms
+
+	// Local dictionary of terms
+	const FluxDictionary = {
+		"image id": {
+			definition:
+				"An ID is a unique identifier used to target a specific HTML element.",
+			example: `<img id="profile-pic" src="photo.jpg" alt="Profile Picture">`,
+		},
+		"query selector": {
+			definition:
+				"A DOM method that selects the first matching element based on a CSS selector.",
+			example: `const img = document.querySelector("#profile-pic");`,
+		},
+		"event listener": {
+			definition:
+				"A function that waits for a specific event and runs code when it occurs.",
+			example: `button.addEventListener("click", () => console.log("Clicked!"));`,
+		},
+		fetch: {
+			definition:
+				"A browser method that sends a request to a URL and returns a promise with the response.",
+			example: `const res = await fetch("https://api.example.com");`,
+		},
+		async: {
+			definition:
+				"A keyword that allows a function to use 'await' to pause until a promise resolves.",
+			example: `async function loadData() { const res = await fetch(url); }`,
+		},
+	};
+
+	// =========================
+	// FluxAPI State
+	// =========================
+	const FluxState = {
+		term: "",
+		result: null,
+		setResult(value) {
+			this.result = value;
+			renderFlux();
+		},
+	};
+
+	// =========================
+	// DOM Cache
+	// =========================
+	const fluxInput = document.getElementById("flux-input");
+	const fluxButton = document.getElementById("flux-button");
+	const fluxDefinition = document.querySelector(".flux-definition");
+	const fluxExample = document.querySelector(".flux-example");
+
+	// =========================
+	// Helpers
+	// Fake async fetch to mimic a real API delay
+	// =========================
+	async function loadFluxDefinition(term) {
+		return new Promise((resolve) => {
+			const key = term.toLowerCase().trim();
+			const result = FluxDictionary[key] || null;
+			setTimeout(() => resolve(result), FLUX_FAKE_DELAY);
+		});
+	}
+
+	// =========================
+	// Render
+	// =========================
+	function renderFlux() {
+		if (!FluxState.result) {
+			fluxDefinition.textContent = "No matching term found.";
+			fluxExample.textContent = "";
+			return;
+		}
+
+		fluxDefinition.textContent = FluxState.result.definition;
+		fluxExample.textContent = FluxState.result.example;
+	}
+
+	// =========================
+	// Events
+	// =========================
+	async function setupFluxAPI() {
+	if (!fluxButton || !fluxInput) return;
+	
+		fluxButton.addEventListener("click", async () => {
+			const term = fluxInput.value.trim();
+			
+
+
+			const result = await loadFluxDefinition(term);
+			FluxState.setResult(result);
+		});
+		
+		renderFlux();
+		
+	}
 
 	// ---- RUN AFTER PLACEHOLDERS ----
 	try {
@@ -327,4 +425,5 @@ async function loadGitHubProfile() {
 	loadTrendingMovies();
 	setupJokeCell();
 	loadGitHubProfile();
+	renderFlux();
 });
