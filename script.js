@@ -396,19 +396,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Events
 	// =========================
 	async function setupFluxAPI() {
-	if (!fluxButton || !fluxInput) return;
-	
+		if (!fluxButton || !fluxInput) return;
+
 		fluxButton.addEventListener("click", async () => {
 			const term = fluxInput.value.trim();
-			
-
 
 			const result = await loadFluxDefinition(term);
 			FluxState.setResult(result);
 		});
-		
+
 		renderFlux();
-		
 	}
 
 	// ---- RUN AFTER PLACEHOLDERS ----
@@ -425,5 +422,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	loadTrendingMovies();
 	setupJokeCell();
 	loadGitHubProfile();
+	setupFluxAPI();
 	renderFlux();
 });

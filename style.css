@@ -245,37 +245,51 @@ body {
 	background: #00ff8033; /* faint green glow */
 }
 
+/* ========================= */
+/* FluxAPI Cell Styling      */
+/* ========================= */
+
 #flux-cell {
-  
   padding: var(--spacing);
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
 
+.flux-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
 }
 
 #flux-output {
- 
   padding: var(--spacing);
   border-radius: var(--radius);
-  margin: 0.8rem 0 0 0;
-
+  margin: 0.5rem 0 0 0;
+  
+   width: 100%;
+  max-width: 260px;   
+  align-self: center; 
+  text-align: center;
+  
+  height: auto;
+  align-self: center;
+  min-height:120px;
 }
 
-/* ========================= */
-/* Typography                */
-/* ========================= */
+/* Typography */
 .cell-title {
-	display: block;
-color: #00ff80;
-font-weight: bold;
-margin-bottom: 0.5rem;
+  display: block;
+  color: #00ff80;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
 .flux-label {
-
   color: #00ff80;
   font-size: 1rem;
   display: block;
@@ -283,7 +297,6 @@ margin-bottom: 0.5rem;
 }
 
 .flux-definition {
-  
   color: var(--text);
   margin-bottom: 0.5rem;
 }
@@ -291,34 +304,35 @@ margin-bottom: 0.5rem;
 .flux-example {
   font-family: "Courier New", monospace;
   background: #e8e8e8;
-  padding: 2rem;
+  padding: 0.5rem;
   border-radius: var(--radius);
   overflow-x: auto;
-  height: auto;
+ text-align: justify;
+ text-wrap: wrap;
+ font-size:medium;
 }
 
-/* ========================= */
-/* Tags                      */
-/* ========================= */
+/* Form items */
 #flux-input {
   padding: 0.5rem;
   border-radius: var(--radius);
   border: 1px solid #120c0c;
-  width: 100%;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
- 
+  align-self: center;
 }
 
-.btn {
-	display:inline-block;
+#flux-button {
+  width: auto;
+  display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
   background: var(--accent);
   color: white;
-  width: 100%;
   font-family: var(--font-body);
   margin-top: 0.5rem;
-  
+  align-self: center;
+  text-align: center;
 }
+
